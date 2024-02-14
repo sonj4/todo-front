@@ -37,6 +37,7 @@ function App({ signOut, user }) {
   const [newTodo, setNewTodo] = useState({
     name: "",
     done: false,
+    userId: user.userId,
   });
   const [isLoading, setIsLoading] = useState(false);
   const handleNameChange = (e) => {
@@ -52,7 +53,10 @@ function App({ signOut, user }) {
       setIsLoading(true);
       try {
         axios.get(`${process.env.REACT_APP_URL}`).then((data) => {
-          setTodos(data.data);
+          const filteredTodos = data.data.filter(
+            (todo) => user.userId === todo.userId
+          );
+          setTodos(filteredTodos);
           console.log(data.data);
         });
       } catch (err) {
