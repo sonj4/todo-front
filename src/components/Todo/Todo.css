@@ -1,0 +1,23 @@
+.todo-container {
+  border-radius: 0.5rem;
+  background-color: #4db3f1;
+  padding: 10px;
+  display: flex;
+  max-width: 300px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.todo-subcontainer {
+  display: flex;
+  align-items: center;
+}
+
+.todo-title {
+  color: white;
+}
+
+.todo-title.done {
+  text-decoration: line-through;
+}
