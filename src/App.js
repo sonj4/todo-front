@@ -4,8 +4,36 @@ import Todo from "./components/Todo/Todo";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import React from "react";
+import { Amplify } from "aws-amplify";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import awsExports from "./aws-exports";
+// Amplify.configure(awsExports);
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      region: "eu-central-1",
+      userPoolClientId: "495drt6u91pqds57t0njssvk8v",
+      userPoolId: "eu-central-1_G4us2iZBm",
+      // loginWith: {
+      // Optional
+      // oauth: {
+      //   domain:
+      //     "abcdefghij1234567890-29051e27.auth.us-east-1.amazoncognito.com",
+      //   scopes: ["openid email phone profile aws.cognito.signin.user.admin "],
+      //   redirectSignIn: ["http://localhost:3000/", "https://example.com/"],
+      //   redirectSignOut: ["http://localhost:3000/", "https://example.com/"],
+      //   responseType: "code",
+      // },
+      // username: "false",
+      // email: "true", // Optional
+      // phone: "false", // Optional
+      // },
+    },
+  },
+});
 
-function App() {
+function App({ signOut, user }) {
   const [newTodo, setNewTodo] = useState({
     name: "",
     done: false,
@@ -55,7 +83,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header signOut={signOut} user={user} />
       {isLoading ? (
         <div>Loading todos...</div>
       ) : (
@@ -64,15 +92,16 @@ function App() {
         ))
       )}
       <div className="dodaj">
-        <h2>Dodaj todo</h2>
+        <h2>Dodaj to do</h2>
 
-        <div>todo:</div>
+        <div>Naziv:</div>
 
         <input type="text" value={newTodo.name} onChange={handleNameChange} />
 
-        <button onClick={handleAddTodo}>dodaj</button>
+        <button onClick={handleAddTodo}>DODAJ</button>
       </div>
     </div>
   );
 }
-export default App;
+export default withAuthenticator(App);
+//export default App;

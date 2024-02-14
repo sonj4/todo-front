@@ -7,6 +7,7 @@ header {
   padding: 12px 16px;
   position: relative;
   justify-content: space-between;
+  background: linear-gradient(#3f84eb98, #fff);
 }
 
 .ul-header {

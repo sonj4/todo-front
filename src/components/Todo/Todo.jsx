@@ -52,7 +52,7 @@ export default function Todo({ todo, setTodos }) {
         </p>
       </div>
 
-      <button onClick={handleDelete}>DELETE</button>
+      <button onClick={handleDelete}>OBRIŠI</button>
     </div>
   );
 }
